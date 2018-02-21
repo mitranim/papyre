@@ -108,7 +108,7 @@ papyre: {fn: html, layout: Index}
 **Hello world!**
 ```
 
-`index.js` must export the rendering function `html` specified in the template. A rendering function receives a template with metadata and returns a string. That's it. It could be making network calls on a meson uplink to the dark side of the Moon. Or it could use React:
+`index.js` must export the rendering function `html` specified in the template. A rendering function receives a template with metadata and returns a string or a promise of a string. That's it. It could be making network calls on a meson uplink to the dark side of the Moon. Or it could use React:
 
 ```js
 import {createElement} from 'react'
