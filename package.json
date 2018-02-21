@@ -1,0 +1,31 @@
+{
+  "name": "papyre",
+  "version": "0.0.1",
+  "description": "Build tool for static websites. Bring your own rendering engine. Works well with React and Netlify CMS",
+  "main": "lib/papyre",
+  "keywords": [
+    "static site generator",
+    "build tool",
+    "netlify cms",
+    "react",
+    "webpack"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mitranim/papyre.git"
+  },
+  "dependencies": {
+    "chokidar": "^2.0.2",
+    "fpx": "^0.4.0",
+    "front-matter": "^2.3.0",
+    "glob": "^7.1.2",
+    "memory-fs": "^0.4.1",
+    "mkdirp": "^0.5.1",
+    "webpack": "^3.11.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.1",
+    "eslint-plugin-react": "7.7.0",
+    "eslint_d": "4.2.5"
+  }
+}

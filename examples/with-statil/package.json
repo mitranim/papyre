@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "node build watch"
+  },
+  "devDependencies": {
+    "marked": "0.3.15",
+    "statil": "0.7.0"
+  }
+}

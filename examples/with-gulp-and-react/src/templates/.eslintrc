@@ -1,0 +1,18 @@
+{
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "jsx-quotes": ["error", "prefer-single"],
+    "react/jsx-curly-spacing": "error",
+    "react/jsx-first-prop-new-line": ["error", "multiline"],
+    "react/jsx-no-undef": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/no-unknown-property": "error",
+    "react/react-in-jsx-scope": "error"
+  }
+}
