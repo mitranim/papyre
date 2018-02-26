@@ -14,7 +14,7 @@ New and immature. Feedback and suggestions are welcome.
 * [Why](#why)
 * [Usage](#usage)
 * [API](#api)
-  * [Front Matter and Props](#front-matter-and-props)
+  * [Front Matter, Props, Render Functions](#front-matter-props-render-functions)
   * [`build`](#buildwebpackconfig-ondone)
   * [`watch`](#watchwebpackconfig-ondone)
   * [`writeEntries`](#writeentriesdir-entries)
@@ -42,7 +42,7 @@ This example uses React and involves three files: a build script, a markdown/HTM
       ╚═ index.js
 ```
 
-Here, `build.js` will be a standalone build script. Don't balk at the glue code; some things are better in user code.
+Here, `build.js` will be a standalone build script. Don't balk at the glue code; Papyre is not for useless 1-liner demos.
 
 ```js
 'use strict'
@@ -158,37 +158,15 @@ The `public` dir should now contain the output:
 
 ## API
 
-### Front Matter and Props
+### Front Matter, Props, Render Functions
 
-Templates typically look like this:
-
-```
----
-(optional metadata in YAML format)
----
-
-(body)
-```
-
-The `--- ... ---` part is called ["front matter"](https://github.com/jxson/front-matter) and must be YAML.
-
-Papyre renders those and only those templates that specify a rendering function, which must be exported by your main JS file.
+Rendering is done by user-defined functions with the following signature:
 
 ```
----
-papyre: {fn: myRenderingFunction}
----
+Props -> string | Promise<string>
 ```
 
-```js
-export function myRenderingFunction(props) {
-  return props.entry.body
-}
-```
-
-Each template is parsed into an entry, which is the YAML front matter dict, with the remaining content added as `body`, plus the template's relative `path`.
-
-The rendering function receives props with the following shape:
+Where props have the following shape:
 
 ```js
 interface Props {
@@ -208,7 +186,51 @@ interface EntryTree {
 }
 ```
 
-`entries` is the collection of all parsed entries. `tree` is the tree of all entries matching the folder structure, for convenient lookup. It's especially useful for rendering "index" pages that display multiple items, such as blog posts.
+`entries` is the collection of the parsed templates. `tree` is the tree of all entries matching the folder structure, for convenient lookup. It's especially useful for rendering "index" pages that display multiple items, such as blog posts.
+
+Templates typically look like this:
+
+```
+---
+(optional metadata in YAML format)
+---
+
+(body)
+```
+
+The `--- ... ---` part is called ["front matter"](https://github.com/jxson/front-matter) and must be YAML.
+
+Templates can also be JSON and YAML files. The top level data structure must be a dict:
+
+```json
+// json
+{
+  "title": "Landing",
+  "description": "Company Website"
+}
+```
+
+```yaml
+# yaml
+title: Landing
+description: Company Website
+```
+
+Papyre renders those and only those templates that specify a rendering function, which must be exported by your main JS file.
+
+```
+---
+papyre: {fn: myRenderingFunction}
+---
+```
+
+```js
+export function myRenderingFunction(props) {
+  return props.entry.body
+}
+```
+
+Each template is parsed into an entry, which is the YAML front matter dict or the top-level data structure, with the remaining content added as `body`, plus the template's relative `path`.
 
 ### Using the Tree
 
@@ -347,4 +369,4 @@ Should be called in the `build` or `watch` callback; see the `examples` director
 
 ## Misc
 
-Feedback and suggestions are welcome!
+I'm receptive to suggestions. If this library _almost_ fits you but needs changes, open an issue or chat me up. Contacts: https://mitranim.com/#contacts

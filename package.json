@@ -1,6 +1,6 @@
 {
   "name": "papyre",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Build tool for static websites. Bring your own rendering engine. Works well with React and Netlify CMS",
   "main": "lib/papyre",
   "keywords": [
