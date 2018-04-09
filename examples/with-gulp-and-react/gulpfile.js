@@ -14,14 +14,10 @@ const webpackConfig = {
   }]},
 }
 
-gulp.task('build', done => {
-  papyre.build(webpackConfig, (err, result) => {
-    if (err) done(err)
-    else {
-      log(result.timing)
-      papyre.writeEntries('public', renameEntries(result.entries)).then(done, done)
-    }
-  })
+gulp.task('build', async () => {
+  const result = await papyre.buildP(webpackConfig)
+  log(result.timing)
+  await papyre.writeEntries('public', renameEntries(result.entries))
 })
 
 gulp.task('watch', () => {

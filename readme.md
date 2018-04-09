@@ -16,6 +16,7 @@ New and immature. Feedback and suggestions are welcome.
 * [API](#api)
   * [Front Matter, Props, Render Functions](#front-matter-props-render-functions)
   * [`build`](#buildwebpackconfig-ondone)
+  * [`buildP`](#buildpwebpackconfig)
   * [`watch`](#watchwebpackconfig-ondone)
   * [`writeEntries`](#writeentriesdir-entries)
 * [Misc](#misc)
@@ -337,6 +338,17 @@ interface Entry {
 To write the result to disk, use `writeEntries`, see below.
 
 When reusing a browser-oriented config, make sure to disable minification, i.e. `webpack.optimize.UglifyJsPlugin`, since it's expensive and pointless for a build-only bundle.
+
+### `buildP(webpackConfig)`
+
+Same as [`build`](#buildwebpackconfig-ondone), but instead of accepting a callback, returns a promise. Convenient with coroutines:
+
+```js
+async function build() {
+  const result = await papyre.buildP(webpackConfig)
+  await papyre.writeEntries('...', result.entries)
+}
+```
 
 ### `watch(webpackConfig, onDone)`
 
